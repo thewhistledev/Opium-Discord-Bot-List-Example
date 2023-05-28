@@ -32,3 +32,7 @@ To get started with the Discord Bot List example, follow these steps:
 ## Contributing
 
 Contributions are welcome! If you have any suggestions, improvements, or bug fixes, feel free to open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [GPL-3.0 license](LICENSE).
