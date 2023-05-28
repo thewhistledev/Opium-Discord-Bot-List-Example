@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Repository - Bot Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="bg-blue-500 text-white py-4 px-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-lg font-bold">Discord Bot Repository</a>
+            <nav>
+                <a href="/" class="mr-4">Home</a>
+                <a href="/explore" class="mr-4">Explore</a>
+                <a href="/add" class="mr-4">Add Bot</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto my-8">
+        <div class="flex flex-col md:flex-row">
+            <!-- Bot Details -->
+            <div class="w-full px-4">
+                <div class="border border-gray-300 rounded p-4">
+                    <div class="flex items-center mb-4">
+                        <img class="w-12 h-12 bg-gray-300 rounded-full mr-4" src="<%= bot.imageURL %>" alt="Bot image">
+                        <div>
+                            <h2 class="font-bold"><%= bot.name %></h2>
+                            <p class="text-gray-600"><%= bot.description %></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold">Author:</h3>
+                        <p><%= bot.author %></p>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="font-bold">Invite Link:</h3>
+                        <a href="<%= bot.invite %>" target="_blank"><%= bot.invite %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

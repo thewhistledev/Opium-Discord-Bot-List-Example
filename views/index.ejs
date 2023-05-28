@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Repository - Tailwind CSS Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<body>
+    <style>
+        .lazy {
+            animation: pulse 2s infinite ease-in-out;
+          }
+          
+          @keyframes pulse {
+            0%, 100% {
+              background-color: #f3f3f3;
+            }
+            50% {
+              background-color: #e0e0e0;
+            }
+          }          
+    </style>
+    <!-- Header -->
+    <header class="bg-blue-500 text-white py-4 px-8">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-lg font-bold">Discord Bot Repository</a>
+            <nav>
+                <a href="/" class="mr-4">Home</a>
+                <a href="/explore" class="mr-4">Explore</a>
+                <a href="/add" class="mr-4">Add Bot</a>
+            </nav>
+            <% if (user) { %>
+                <span class="mr-4">Logged in as: <%= user.username %></span>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login" class="mr-4">Login</a>
+                <a href="/register">Register</a>
+            <% } %>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto my-8">
+        <div class="flex flex-col md:flex-row">
+            <!-- Bot List -->
+            <div class="w-full mx-auto md:w-1/2 px-8">
+                <div class="mb-4">
+                    <form action="/search" method="get" class="mb-4">
+                        <input type="text" name="q" placeholder="Search bots"
+                            class="w-full p-2 border border-gray-300 rounded">
+                    </form>
+                </div>
+                <div class="border border-gray-300 rounded p-4 mb-4">
+                    <!-- Bot Item -->
+                    <% bots.forEach(bot => { %>
+                    <div class="flex items-center mb-2">
+                        <img class="w-8 h-8 bg-gray-300 rounded-full mr-2 lazy"
+                            data-src="<%= bot.imageURL %>" alt="Bot image">
+                        <div>
+                            <h2 class="font-bold"><%= bot.name %></h2>
+                            <p class="text-gray-600"><%= bot.description %></p>
+                            <a href="/api/v1/bots/<%= bot._id %>">View Bot</a>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <!-- Bot Details -->
+            <!-- This section can be moved to a separate EJS file -->
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = Array.from(document.querySelectorAll('img.lazy'));
+
+            if ('IntersectionObserver' in window) {
+                const lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.onload = function() {
+                                lazyImage.classList.remove('lazy');
+                            }
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.onload = function() {
+                        lazyImage.classList.remove('lazy');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
