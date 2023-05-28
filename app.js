@@ -10,7 +10,7 @@ const router = express.Router();
 const Bot = require('./models/bot');
 const User = require('./models/user');
 const app = express();
-const conf = require('./config.json'); // make sure you rename config.example.json to config.json and fill in the values.
+const conf = require('./config.json'); // make sure you rename config.example.json to config.json and fill in the values. 
 
 
 
